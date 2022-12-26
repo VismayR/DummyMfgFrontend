@@ -6,7 +6,7 @@ import { UserEndPoint } from "../constant/EndPoints";
 
 const UsersApi = (props) => {
     const callGetUsersList = () => {
-        axios.get('https://9fb7-114-143-107-6.in.ngrok.io/user')
+        axios.get('https://d8c4-103-225-132-0.in.ngrok.io/user/1')
             .then(function (response) {
                 return props.setProfileData(response?.data);
             })
@@ -14,9 +14,7 @@ const UsersApi = (props) => {
                 return error;
             })
     }
-    useEffect(() => {
         callGetUsersList();
-    }, [])
 }
 
 export default UsersApi;
