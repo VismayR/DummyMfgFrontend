@@ -1,16 +1,17 @@
-import React from 'react'
-import { NavigationContainer } from '@react-navigation/native';
+import React from 'react';
+import {NavigationContainer} from '@react-navigation/native';
 import DrawerNavigator from './src/navigator/DrawerNavigator';
-import { StackNav } from './src/navigator/StackNavigatior';
-
+import {Provider} from 'react-redux';
+import {store} from './src/Redux/store'
 
 const App = () => {
-
   return (
-    <NavigationContainer>
-      <DrawerNavigator/>
-    </NavigationContainer>
-  )
-}
+    <Provider store={store}>
+      <NavigationContainer>
+        <DrawerNavigator />
+      </NavigationContainer>
+    </Provider>
+  );
+};
 
 export default App;

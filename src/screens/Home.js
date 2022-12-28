@@ -1,13 +1,11 @@
-import React from 'react'
-import { Text } from 'react-native'
-import HomeTabs from '../components/HomeTabs'
-import { HomeConst } from '../constant/Home'
+import React from 'react';
+import {Text, TouchableOpacity} from 'react-native';
+import HomeStack from '../navigator/HomeStack';
 
-export const Home = () => {
+export const Home = ({navigation}) => {
   return (
     <>
-      <Text>{HomeConst}</Text>
-      <HomeTabs/>
+    <HomeStack/>
     </>
-  )
-}
+  );
+};

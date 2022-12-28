@@ -1,20 +1,19 @@
-import axios from "axios";
-import { useEffect } from "react";
-import { UserEndPoint } from "../constant/EndPoints";
-// import { BASE_URL } from '@env'
+import axios from 'axios';
 
+const makeRequest = (EndPoint, method, data) => {
+  return new Promise((resolve, reject) => {
+    axios({
+      method: method,
+      data: data,
+      url: `https://eff2-114-143-107-6.in.ngrok.io/${EndPoint}/1`,
+    })
+      .then(function (response) {
+        resolve(response?.data);
+      })
+      .catch(function (error) {
+        reject(error);
+      });
+  });
+};
 
-const UsersApi = (props) => {
-    const callGetUsersList = () => {
-        axios.get('https://d8c4-103-225-132-0.in.ngrok.io/user/1')
-            .then(function (response) {
-                return props.setProfileData(response?.data);
-            })
-            .catch(function (error) {
-                return error;
-            })
-    }
-        callGetUsersList();
-}
-
-export default UsersApi;
+export default makeRequest;

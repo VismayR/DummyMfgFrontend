@@ -1,9 +1,10 @@
 import React from 'react'
 import { Text } from 'react-native'
+import { electricVehicleAvailability } from '../constant/ElectricVehicle'
 
 const ElectricVehicle = () => {
   return (
-    <Text style={{fontWeight:'700', textAlign:'center'}}>No vehicle available</Text>
+    <Text style={{fontWeight:'700', textAlign:'center'}}>{electricVehicleAvailability}</Text>
   )
 }
 

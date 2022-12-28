@@ -1,0 +1,1 @@
+export const electricVehicleAvailability = "No vehicle available"
