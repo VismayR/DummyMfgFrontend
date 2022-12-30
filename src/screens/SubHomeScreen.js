@@ -7,7 +7,7 @@ const SubHome = ({navigation}) => {
       <View style={styles.container}>
         <TouchableOpacity
           style={styles.card}
-          onPress={() => navigation.navigate('station')}>
+          onPress={() => navigation.navigate('Station')}>
           <Text style={styles.cardText}>Station Finder</Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
   container: {
     display: 'flex',
     flexDirection: 'row',
-    marginHorizontal:40,
+    marginHorizontal: 40,
   },
   card: {
     height: 120,

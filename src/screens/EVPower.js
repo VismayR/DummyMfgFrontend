@@ -1,10 +1,8 @@
-import React from 'react'
-import { Text } from 'react-native'
+import React from 'react';
+import {Text} from 'react-native';
 
 const EVPower = () => {
-  return (
-    <Text>EVPower</Text>
-  )
-}
+  return <Text>EVPower</Text>;
+};
 
-export default EVPower
+export default EVPower;

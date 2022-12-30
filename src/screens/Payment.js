@@ -1,10 +1,8 @@
-import React from 'react'
-import { Text } from 'react-native'
+import React from 'react';
+import {Text} from 'react-native';
 
 const Payment = () => {
-  return (
-    <Text>Payment</Text>
-  )
-}
+  return <Text>Payment</Text>;
+};
 
-export default Payment
+export default Payment;

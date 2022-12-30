@@ -1,15 +1,18 @@
-import { DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer'
-import React from 'react'
-import { Text, TouchableOpacity, View } from 'react-native'
-import SidebarHeader from '../components/SidebarHeader'
+import {
+  DrawerContentScrollView,
+  DrawerItemList,
+} from '@react-navigation/drawer';
+import React from 'react';
+import {Text, TouchableOpacity, View} from 'react-native';
+import SidebarHeader from '../components/SidebarHeader';
 
-const CustomDrawer = (props) => {
+const CustomDrawer = props => {
   return (
     <DrawerContentScrollView {...props}>
-        <SidebarHeader/>
-        <DrawerItemList {...props}/>
+      <SidebarHeader />
+      <DrawerItemList {...props} />
     </DrawerContentScrollView>
-  )
-}
+  );
+};
 
-export default CustomDrawer
+export default CustomDrawer;
