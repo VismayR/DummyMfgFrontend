@@ -4,10 +4,9 @@ import DrawerNavigator from './src/navigator/DrawerNavigator';
 import {Provider} from 'react-redux';
 import {store} from './src/Redux/store';
 import AuthNavigation from './src/navigator/AuthNavigation';
-import {SafeAreaView} from 'react-native';
 
 const App = () => {
-  const validation = true;
+  const validation = false;
   return (
       <Provider store={store}>
         <NavigationContainer>

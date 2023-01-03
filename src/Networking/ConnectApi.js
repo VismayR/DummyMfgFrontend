@@ -5,7 +5,7 @@ const makeRequest = (EndPoint, method, data) => {
     axios({
       method: method,
       data: data,
-      url: `https://9f16-114-143-107-6.in.ngrok.io/${EndPoint}/1`,
+      url: `https://a6a7-114-143-107-6.in.ngrok.io/${EndPoint}/1`,
     })
       .then(function (response) {
         resolve(response?.data);

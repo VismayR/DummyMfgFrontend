@@ -44,6 +44,7 @@ export const styles = StyleSheet.create({
       display: 'flex',
       flexDirection: 'row',
       flex:1,
+      marginTop:10
     },
     nameInputView:{
       flex:1

@@ -29,8 +29,6 @@ import {setEditButton} from '../Redux/actions/EditBtn';
 import {styles} from './profile/style';
 import ModelComp from './profile/model';
 
-import mime from 'mime';
-
 const ProfileEditDesign = () => {
   //getting state from redux for edit button.
   const initialState = useSelector(state => state.editBtnReducer);
@@ -48,7 +46,7 @@ const ProfileEditDesign = () => {
 
   const [modalVisible, setModalVisible] = useState(false);
 
-  const filepath = `https://9f16-114-143-107-6.in.ngrok.io/${imageUrl}`;
+  const filepath = `https://a6a7-114-143-107-6.in.ngrok.io/${imageUrl}`;
 
   //getting the response from api in initial screen load.
   useEffect(() => {
@@ -104,27 +102,28 @@ const ProfileEditDesign = () => {
       height: 400,
       cropping: true,
     }).then(image => {
-      uploadImage(image.path)
+      console.log(image.path)
     })
     .catch(err=>console.log(err))
   };
 
-  const uploadImage = (imagePath)=>{
-    const imageData = new FormData();
-    console.log(imageData)
-    imageData.append('image_url',{
-      uri: imagePath,
-      name:'image.jpg',
-      type:'image/jpg'
-    })
-    // console.log('form data', imageData)
-  }
+  // const uploadImage = (imagePath)=>{
+  //   const imageData = new FormData();
+  //   console.log(imageData)
+  //   imageData.append('image_url',{
+  //     uri: imagePath,
+  //     name:'image.jpg',
+  //     type:'image/jpg'
+  //   })
+  //   // console.log('form data', imageData)
+  // }
 
   return (
     <ScrollView style={styles.mainView}>
       <ModelComp
         setModalVisible={setModalVisible}
         modalVisible={modalVisible}
+        setCountry={setCountry}
       />
       <View style={styles.displayArea}>
         <View style={styles.imageContainer}>

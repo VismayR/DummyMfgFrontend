@@ -4,15 +4,12 @@ import {MyAccount} from '../screens/MyAccount';
 import {Home} from '../screens/Home';
 import CustomDrawer from './CustomDrawer';
 import EVPower from '../screens/EVPower';
-import {Image, StyleSheet, TouchableOpacity} from 'react-native';
+import {Image, StyleSheet, TouchableOpacity, Text} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {setEditButton} from '../Redux/actions/EditBtn';
-import HomeStack from './HomeStack';
 import StationFinder from '../screens/StationFinder';
 import Promotions from '../screens/Promotions';
 import TripPlanner from '../screens/TripPlanner';
-import Login from '../screens/Auth/Login';
-import Register from '../screens/Auth/Register';
 
 const DrawerNavigator = () => {
   const Drawer = createDrawerNavigator();
