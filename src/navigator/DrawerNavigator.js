@@ -8,6 +8,11 @@ import {Image, StyleSheet, TouchableOpacity} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {setEditButton} from '../Redux/actions/EditBtn';
 import HomeStack from './HomeStack';
+import StationFinder from '../screens/StationFinder';
+import Promotions from '../screens/Promotions';
+import TripPlanner from '../screens/TripPlanner';
+import Login from '../screens/Auth/Login';
+import Register from '../screens/Auth/Register';
 
 const DrawerNavigator = () => {
   const Drawer = createDrawerNavigator();
@@ -44,6 +49,12 @@ const DrawerNavigator = () => {
         }}
       />
       <Drawer.Screen name="EV Power" component={EVPower} />
+      <Drawer.Screen name="Station Finder" component={StationFinder} />
+      <Drawer.Screen name="Promotions" component={Promotions} />
+      <Drawer.Screen name="Trip Planner" component={TripPlanner} />
+      {/* <Drawer.Screen name="Terms and Conditions" component={EVPower} />
+      <Drawer.Screen name="Charging History" component={EVPower} /> */}
+
     </Drawer.Navigator>
   );
 };

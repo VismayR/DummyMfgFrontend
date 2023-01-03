@@ -1,23 +1,20 @@
 import React from 'react';
-import {Text} from 'react-native';
+import {FlatList, Modal, Pressable, Text, View} from 'react-native';
 
-const ModelComp = () => {
+const ModelComp = (props) => {
   return (
     <Modal
       animationType="slide"
       transparent={true}
-      visible={modalVisible}
-      onRequestClose={() => {
-        Alert.alert('Modal has been closed.');
-        setModalVisible(!modalVisible);
-      }}>
-      <View style={styles.centeredView}>
-        <View style={styles.modalView}>
-          <Text style={styles.modalText}>Hello World!</Text>
+      visible={props.modalVisible}
+      >
+      <View style={{backgroundColor:'gray',flex:1}}>
+        <View>
+          <Text>Hello World!</Text>
+          <FlatList/>
           <Pressable
-            style={[styles.button, styles.buttonClose]}
-            onPress={() => setModalVisible(!modalVisible)}>
-            <Text style={styles.textStyle}>Hide Modal</Text>
+            onPress={() => props.setModalVisible(!props.modalVisible)}>
+            <Text>Hide Modal</Text>
           </Pressable>
         </View>
       </View>

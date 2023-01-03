@@ -1,36 +1,32 @@
-import {
-  FlatList,
-  Image,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-} from 'react-native';
+import {FlatList, Image, TextInput, View} from 'react-native';
 import React, {useState} from 'react';
 import Card from './Card';
-import { SEARCH_PLACEHOLDER } from '../../constant/ElectricVehicle';
+import {SEARCH_PLACEHOLDER} from '../../constant/ElectricVehicle';
+import { styles } from './style';
 
 const CARS = require('../ElectricVehicle/vehicleData.json');
 
 export default function SelectElectricVehicle({navigation}) {
-  
   const [search, setSearch] = useState('');
   const [filteredData, setFilteredData] = useState(CARS);
 
-  const renderItem = ({item}) =>   (
-  <Card title={item.car} price={item.price} url={item.url} navigation={navigation} id={item.id}/>
-)
+  const renderItem = ({item}) => (
+    <Card key={item.id}
+      title={item.car}
+      price={item.price}
+      url={item.url}
+      navigation={navigation}
+      id={item.id}
+    />
+  );
 
-
-  const searchFilter = (text) => {
+  const searchFilter = text => {
     // Check if searched text is not blank
     if (text) {
       //If text is not blank filter all cars data and update filter data
-      const newData = CARS.filter((item)=>{
+      const newData = CARS.filter(item => {
         // Applying filter for the inserted text in search bar
-        const itemData = item.car
-          ? item.car.toUpperCase()
-          : null;
+        const itemData = item.car ? item.car.toUpperCase() : null;
         const textData = text.toUpperCase();
         return itemData.indexOf(textData) > -1;
       });
@@ -74,43 +70,3 @@ export default function SelectElectricVehicle({navigation}) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  mainContainer: {
-    margin: 10,
-  },
-  topContainer: {
-    margin: 10,
-    flexDirection: 'row',
-    paddingBottom: 10,
-    borderBottomWidth: 3,
-    borderBottomColor: 'gray',
-  },
-  inputContainer: {
-    borderWidth: 2,
-    borderColor:'lightgray',
-    flexDirection: 'row',
-    flex: 1,
-    paddingHorizontal: 5,
-  },
-  searchLogo: {
-    width: 25,
-    height: 25,
-    marginTop: 10,
-    marginRight: 10,
-  },
-  filterContainer: {
-    padding: 10,
-    marginLeft: 10,
-    elevation: 5,
-    shadowOffset: {width: -2, height: 10},
-    shadowOpacity: 0.5,
-    shadowRadius: 5,
-    shadowColor: 'gray',
-  },
-  filterLogo: {
-    width: 25,
-    height: 25,
-    marginTop: 10,
-  },
-});

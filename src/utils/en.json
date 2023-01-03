@@ -1,0 +1,10 @@
+{
+    "login":"Login",
+    "register":"Register",
+    "forgotPassword":"Forgot Password?",
+    "forgotPasswordTitle":"Forgot Password",
+    "enterEmailMsg":"Please enter the email address",
+    "cancelBtnTitle":"cancel",
+    "userNameMessage":"*Username is public and will be visible to all the users",
+    "next":"Next"
+}

@@ -1,17 +1,20 @@
 import React, {useEffect, useState} from 'react';
 import {
   ScrollView,
-  StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
   View,
+  Image,
 } from 'react-native';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import ImagePicker from 'react-native-image-crop-picker';
 
 //constants
 import {UserEndPoint} from '../constant/EndPoints';
 import {
+  CHANGE_PICTURE,
+  DELETE_PICTURE,
   profileEditedSavedButton,
   userCountryTitle,
   userEmailTitle,
@@ -22,10 +25,16 @@ import {
 } from '../constant/Profile';
 
 import makeRequest from '../Networking/ConnectApi';
+import {setEditButton} from '../Redux/actions/EditBtn';
+import {styles} from './profile/style';
+import ModelComp from './profile/model';
+
+import mime from 'mime';
 
 const ProfileEditDesign = () => {
   //getting state from redux for edit button.
   const initialState = useSelector(state => state.editBtnReducer);
+  const dispatch = useDispatch();
 
   //storing response from the api.
   const [responses, setResponses] = useState({});
@@ -35,16 +44,26 @@ const ProfileEditDesign = () => {
   const [lastName, setLastName] = useState();
   const [postcode, setPostcode] = useState();
   const [country, setCountry] = useState();
+  const [imageUrl, setImageUrl] = useState();
+
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const filepath = `https://9f16-114-143-107-6.in.ngrok.io/${imageUrl}`;
 
   //getting the response from api in initial screen load.
-  useEffect(async () => {
-    await makeRequest(UserEndPoint, 'get', undefined)
-      .then(function (response) {
-        setResponses(response[0]);
-      })
-      .catch(function (err) {
-        console.warn(err);
-      });
+  useEffect(() => {
+    async function request() {
+      await makeRequest(UserEndPoint, 'get', undefined)
+        .then(function (response) {
+          setResponses(response[0]);
+          console.log(response);
+        })
+        .catch(function (err) {
+          console.warn(err);
+        });
+    }
+    request();
+    dispatch(setEditButton(true));
   }, []);
 
   //passing the data to the state initially with the condition rendering related to change in response.
@@ -53,6 +72,7 @@ const ProfileEditDesign = () => {
     setLastName(responses?.lastName);
     setPostcode(responses?.postcode);
     setCountry(responses?.country);
+    setImageUrl(responses?.image_url);
   }, [responses]);
 
   //sending he edited data to the data base.
@@ -67,25 +87,85 @@ const ProfileEditDesign = () => {
       postcode: postcode,
     };
     makeRequest(UserEndPoint, 'put', data)
-      .then(response => console.warn(response))
+      .then(response => response && dispatch(setEditButton(true)))
       .catch(err => console.warn(err));
   };
 
+  //image deleting
+  const deleteImg = () => {
+    setImageUrl(null);
+    putData;
+  };
+
+  const chooseImage = async () => {
+    await ImagePicker.openPicker({
+      mediaType: 'photo',
+      width: 300,
+      height: 400,
+      cropping: true,
+    }).then(image => {
+      uploadImage(image.path)
+    })
+    .catch(err=>console.log(err))
+  };
+
+  const uploadImage = (imagePath)=>{
+    const imageData = new FormData();
+    console.log(imageData)
+    imageData.append('image_url',{
+      uri: imagePath,
+      name:'image.jpg',
+      type:'image/jpg'
+    })
+    // console.log('form data', imageData)
+  }
+
   return (
-    <ScrollView>
+    <ScrollView style={styles.mainView}>
+      <ModelComp
+        setModalVisible={setModalVisible}
+        modalVisible={modalVisible}
+      />
       <View style={styles.displayArea}>
+        <View style={styles.imageContainer}>
+          {imageUrl !== null ? (
+            <Image
+              style={styles.profileImage}
+              source={{
+                uri: filepath,
+              }}
+            />
+          ) : (
+            <Text style={styles.profileImage}>KG</Text>
+          )}
+        </View>
+        {!initialState && (
+          <View style={styles.pictureHandler}>
+            <TouchableOpacity style={styles.picChangeBtn} onPress={chooseImage}>
+              <Text style={styles.picChangeBtn}>{CHANGE_PICTURE}</Text>
+            </TouchableOpacity>
+
+            <View style={styles.line} />
+            <TouchableOpacity onPress={deleteImg}>
+              <Text style={styles.picDeleteBtn}>{DELETE_PICTURE}</Text>
+            </TouchableOpacity>
+          </View>
+        )}
+
         <View style={styles.nameDisplayView}>
-          <View>
+          <View style={styles.nameInputView}>
             <Text style={styles.title}>{userFirstNameTitle}</Text>
             <TextInput
+              style={!initialState ? styles.changeInput : styles.input}
               value={firstName}
               onChangeText={setFirstName}
               editable={initialState ? false : true}
             />
           </View>
-          <View>
+          <View style={styles.nameInputView}>
             <Text style={styles.title}>{userLastNameTitle}</Text>
             <TextInput
+              style={!initialState ? styles.changeInput : styles.input}
               value={lastName}
               onChangeText={setLastName}
               editable={initialState ? false : true}
@@ -93,11 +173,20 @@ const ProfileEditDesign = () => {
           </View>
         </View>
         <Text style={styles.title}>{userNameTitle}</Text>
-        <TextInput value={responses.userName} editable={false} />
+        <TextInput
+          style={!initialState ? styles.noChangeInput : styles.input}
+          value={responses.userName}
+          editable={false}
+        />
         <Text style={styles.title}>{userEmailTitle}</Text>
-        <TextInput value={responses?.email} editable={false} />
+        <TextInput
+          style={!initialState ? styles.noChangeInput : styles.input}
+          value={responses?.email}
+          editable={false}
+        />
         <Text style={styles.title}>{userPostcodeTitle}</Text>
         <TextInput
+          style={!initialState ? styles.changeInput : styles.input}
           value={`${postcode}`}
           onChangeText={setPostcode}
           keyboardType={'numeric'}
@@ -105,36 +194,19 @@ const ProfileEditDesign = () => {
         />
         <Text style={styles.title}>{userCountryTitle}</Text>
         <TextInput
+          style={!initialState ? styles.changeInput : styles.input}
           value={country}
-          onChangeText={setCountry}
+          onFocus={() => setModalVisible(true)}
           editable={initialState ? false : true}
         />
       </View>
       {!initialState && (
         <TouchableOpacity style={styles.saveButton} onPress={putData}>
-          <Text>{profileEditedSavedButton}</Text>
+          <Text style={styles.saveBtnText}>{profileEditedSavedButton}</Text>
         </TouchableOpacity>
       )}
     </ScrollView>
   );
 };
-
-const styles = StyleSheet.create({
-  title: {
-    color: 'lightgray',
-  },
-  displayArea:{
-    flexDirection:'column',
-    flex:1
-  },
-  saveButton: {
-    backgroundColor: 'red',
-    padding: 10,
-  },
-  nameDisplayView: {
-    display: 'flex',
-    flexDirection: 'row',
-  },
-});
 
 export default ProfileEditDesign;

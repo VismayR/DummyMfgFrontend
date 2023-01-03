@@ -1,10 +1,10 @@
-import { combineReducers } from "redux";
-import { editBtnReducer  } from "./EditBtn";
-import { userDetailsReducer } from "./UserDetails";
+import {combineReducers} from 'redux';
+import {editBtnReducer} from './EditBtn';
+import {selectedVehicleReducer} from './SelectedVehicle';
 
 const rootReducer = combineReducers({
-    editBtnReducer,
-    userDetailsReducer,
+  editBtnReducer,
+  selectedVehicleReducer,
 });
 
 export default rootReducer;
