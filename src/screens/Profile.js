@@ -26,6 +26,7 @@ import {
 
 import makeRequest from '../Networking/ConnectApi';
 import {setEditButton} from '../Redux/actions/EditBtn';
+import { setGetUserDetails } from '../Redux/actions/UserDetails';
 import {styles} from './profile/style';
 import ModelComp from './profile/model';
 
@@ -46,7 +47,7 @@ const ProfileEditDesign = () => {
 
   const [modalVisible, setModalVisible] = useState(false);
 
-  const filepath = `https://a6a7-114-143-107-6.in.ngrok.io/${imageUrl}`;
+  const filepath = `https://ebbe-114-143-107-6.in.ngrok.io/${imageUrl}`;
 
   //getting the response from api in initial screen load.
   useEffect(() => {
@@ -54,7 +55,7 @@ const ProfileEditDesign = () => {
       await makeRequest(UserEndPoint, 'get', undefined)
         .then(function (response) {
           setResponses(response[0]);
-          console.log(response);
+          dispatch(setGetUserDetails(response[0]))
         })
         .catch(function (err) {
           console.warn(err);
@@ -95,6 +96,7 @@ const ProfileEditDesign = () => {
     putData;
   };
 
+  //Image selecting
   const chooseImage = async () => {
     await ImagePicker.openPicker({
       mediaType: 'photo',
@@ -135,7 +137,7 @@ const ProfileEditDesign = () => {
               }}
             />
           ) : (
-            <Text style={styles.profileImage}>KG</Text>
+            <Text style={styles.profileImage}>{responses.firstName[0]+responses.lastName[0]}</Text>
           )}
         </View>
         {!initialState && (

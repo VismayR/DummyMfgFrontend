@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {FlatList, Text, TouchableOpacity} from 'react-native';
 import {useSelector} from 'react-redux';
 import {
@@ -11,7 +11,7 @@ import { styles } from './style';
 const MainElectricVehicleScreen = ({navigation}) => {
   const initialState = useSelector(state => state.selectedVehicleReducer);
 
-  const renderItem = ({item}) => <AddEvCard cardData={item} />;
+  const renderItem = ({item}) => <AddEvCard key={item.id} cardData={item} />;
 
   return (
     <>

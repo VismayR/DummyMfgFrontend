@@ -2,7 +2,7 @@ export const SELECTED_VEHICLE = 'SELECTED_VEHICLE';
 export const DELETED_VEHICLE = 'DELETED_VEHICLE';
 
 
-export const setGetUserDetails = data => ({
+export const setGetVehicleDetails = data => ({
   type: SELECTED_VEHICLE,
   payload: data,
 });

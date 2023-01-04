@@ -6,7 +6,7 @@ import {store} from './src/Redux/store';
 import AuthNavigation from './src/navigator/AuthNavigation';
 
 const App = () => {
-  const validation = false;
+  const validation = true;
   return (
       <Provider store={store}>
         <NavigationContainer>

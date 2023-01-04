@@ -16,7 +16,7 @@ import {
 } from '../../constant/ElectricVehicle';
 import {StackActions} from '@react-navigation/native';
 import {useDispatch} from 'react-redux';
-import {setGetUserDetails} from '../../Redux/actions/SelectedVehicle';
+import {setGetVehicleDetails} from '../../Redux/actions/SelectedVehicle';
 
 const CARS = require('../ElectricVehicle/vehicleData.json');
 
@@ -46,7 +46,7 @@ export default function VehicleDetails({route, navigation}) {
             style={styles.btn}
             onPress={() => {
               navigation.dispatch(StackActions.popToTop());
-              dispatch(setGetUserDetails(res));
+              dispatch(setGetVehicleDetails(res));
             }}>
             <Text style={styles.btnText}>{SELECT_VEHICLE_BTN}</Text>
           </TouchableOpacity>

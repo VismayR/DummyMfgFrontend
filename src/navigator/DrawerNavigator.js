@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {MyAccount} from '../screens/MyAccount';
 import {Home} from '../screens/Home';
@@ -10,6 +10,8 @@ import {setEditButton} from '../Redux/actions/EditBtn';
 import StationFinder from '../screens/StationFinder';
 import Promotions from '../screens/Promotions';
 import TripPlanner from '../screens/TripPlanner';
+import TermsAndConditions from '../screens/TermsAndConditions/TermsAndConditions';
+import ChargeHistory from '../screens/ChargeHistory/ChargeHistory';
 
 const DrawerNavigator = () => {
   const Drawer = createDrawerNavigator();
@@ -49,8 +51,8 @@ const DrawerNavigator = () => {
       <Drawer.Screen name="Station Finder" component={StationFinder} />
       <Drawer.Screen name="Promotions" component={Promotions} />
       <Drawer.Screen name="Trip Planner" component={TripPlanner} />
-      {/* <Drawer.Screen name="Terms and Conditions" component={EVPower} />
-      <Drawer.Screen name="Charging History" component={EVPower} /> */}
+      <Drawer.Screen name="Terms and Conditions" component={TermsAndConditions} />
+      <Drawer.Screen name="Charging History" component={ChargeHistory} />
 
     </Drawer.Navigator>
   );
