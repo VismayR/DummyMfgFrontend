@@ -11,9 +11,8 @@ export default function AddEvCard(props) {
   const dispatch = useDispatch()
 
   const deleteFromSelectedItem = ()=>{
-    var elementPos = initialState.map((x)=>{return x.id }).indexOf(props.cardData.id);
-    initialState.splice(elementPos,1)
-    dispatch(setToDelete(initialState))
+    const newState = initialState.map((x)=>{return props.cardData.id !== x.id })
+    dispatch(setToDelete(newState))
   }
 
   return (
